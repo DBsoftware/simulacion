@@ -1,0 +1,147 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript"
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#navbar-ex-collapse">
+					<span class="sr-only">Toggle navigation</span><span
+						class="icon-bar"></span><span class="icon-bar"></span><span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
+				<ul class="nav navbar-left navbar-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">Aleatorios
+							<i class="fa fa-caret-down"></i>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Basic</a></li>
+							<li><a href="#">aleatorio1</a></li>
+							<li><a href="#">aleatorio2</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="formulario">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<form role="form" id="f">
+						<div class="form-group">
+							<label class="control-label" for="semilla">Semilla</label>
+							<input class="form-control" id="semilla" name="s"
+								placeholder="Enter seed value" type="number" required>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="limite">Limite</label>
+							<input class="form-control" id="limite" name="l"
+								placeholder="Enter limit value" type="number" required>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="Transicion">Funcion Transicion <small>(Usar n como la variable)</small></label>
+							<input class="form-control" id="Transicion" name="x"
+								placeholder="Enter transition function" type="text">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="salida">Funcion salida <small>(Usar n como la variable)</small></label><input
+								class="form-control" id="salida" name="u"
+								placeholder="Enter exit function" type="text">
+						</div>
+						<button type="submit" id="ajax" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section">
+		<div class="container l">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+									<h2>Transicion</h2>
+									<ul id="x" class="list-group text-center">
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<h2>Salida</h2>
+									<ul id="u" class="list-group text-center">
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('h2').hide();
+			function a(aux,b){
+				(b)?aux.forEach(generarListaX):aux.forEach(generarListaU);
+			}
+			function generarListaX(item) {
+			    $('#x').append('<li class="list-group-item" style="display:none" >'+item+'</li>');
+			}
+			function generarListaU(item) {
+			    $('#u').append('<li class="list-group-item" style="display:none">'+item+'</li>');
+			}
+			
+			
+			$('#f').submit(function(){
+				event.preventDefault();
+				params=$('#f').serialize();
+				$('#formulario').hide();
+				$('h2').show();
+				
+				_tran=$('#Transicion').val().replace('+','%2B').replace(/\s/g,'');
+				_exit=$('#salida').val().replace('+','%2B').replace(/\s/g,'');
+				_seed=$('#semilla').val().replace(/\s/g,'');
+				_limit=$('#limite').val().replace(/\s/g,'');
+				
+	            $.ajax({ url:"http://"+$(location).attr('host')+"/random?"+params, success: function(dat){
+	            		a(dat.x,true);
+	            		a(dat.u,false);
+	            		$('#x li').each(function(index) {
+	            			$(this).delay(1000*index).fadeIn(300);
+	            		});
+	            		var set = $('#u li');
+	            		set.each(function(index) {
+	            			$(this).delay(1000*index).fadeIn(300);
+	            		});
+	            		$('.l').prepend('<a id="back" class="btn btn-default">Volver</a>');
+	            		$('#back').click(function(){
+	            			$('#u').empty();
+	            			$('#x').empty();
+	            			$('h2').hide();
+	            			$('#formulario').show();
+	            			$(this).remove();
+	            		})
+	                }
+	             });
+			});  
+		});
+	</script>
+</body>
+</html>
