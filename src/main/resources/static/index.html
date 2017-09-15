@@ -32,9 +32,9 @@
 							<i class="fa fa-caret-down"></i>
 					</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Basic</a></li>
-							<li><a href="#">aleatorio1</a></li>
-							<li><a href="#">aleatorio2</a></li>
+							<li><a style="cursor:hand" id="basic">Basic</a></li>
+							<li><a style="cursor:hand" id="mid">Midsquare</a></li>
+							<li><a style="cursor:hand" id="congruencial">Congruenciales</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -57,13 +57,14 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="Transicion">Funcion Transicion <small>(Usar n como la variable)</small></label>
-							<input class="form-control" id="Transicion" name="x"
-								placeholder="Enter transition function" type="text">
+							<textArea class="form-control" id="Transicion" name="x"
+								placeholder="Enter transition function" type="text"></textArea>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="salida">Funcion salida <small>(Usar n como la variable)</small></label><input
+							<label class="control-label" for="salida">Funcion salida <small>(Usar n como la variable)</small></label>
+							<textArea
 								class="form-control" id="salida" name="u"
-								placeholder="Enter exit function" type="text">
+								placeholder="Enter exit function" type="text"></textArea>
 						</div>
 						<button type="submit" id="ajax" class="btn btn-default">Submit</button>
 					</form>
@@ -97,6 +98,30 @@
 	</div>
 	<script type="text/javascript">
 		$(function(){
+			var _method="GET";
+			var _ruta="";
+			var _bool=true;
+			$("#Transicion").val("(n+2)/Math.pow(n, 2)");
+			$("#salida").val("n / 33");
+			$("#semilla").val("2");
+			$("#limite").val("20");			
+			var midT = 'int num =n.toInteger();\n'+
+						'int aux = 10000;\n'+
+						'int count = 2;'+
+						'while ((num.toString()).length() > count) {\n'+
+						'aux *= 10;\n'+
+						'count++;\n'+
+						'}\n'+
+						'String s=(Math.pow(num, 2) / aux).toString();\n'+
+						's=s.substring(s.indexOf(".")+1);\n'+
+						'while (s.length() < 4) {\n'+
+						's += "0";\n'+
+						'}\n'+
+						'if(s.length() > 4){\n'+
+						's=s.substring(0, 4);\n'+
+						'}\n'+
+						's ';
+			var midE = '"0.$n";';
 			$('h2').hide();
 			function a(aux,b){
 				(b)?aux.forEach(generarListaX):aux.forEach(generarListaU);
@@ -108,19 +133,50 @@
 			    $('#u').append('<li class="list-group-item" style="display:none">'+item+'</li>');
 			}
 			
+			$('#mid').click(()=>{
+				_method="POST";
+				_ruta="";
+				$("#Transicion").val(midT);
+				$("#salida").val(midE);
+				$("#semilla").val("3708");
+				$("#limite").val("9");
+				$("#f").find(".con").remove();
+				_bool=true;
+				
+			})
+			
+			$('#basic').click(()=>{
+				_method="GET";
+				_ruta="";
+				$("#Transicion").val("(n+2)/Math.pow(n, 2)");
+				$("#salida").val("n / 33");
+				$("#semilla").val("2");
+				$("#limite").val("20");	
+				$("#f").find(".con").remove();
+				_bool=true;
+			})	
+			$('#congruencial').click(()=>{				
+				_method="GET";
+				_ruta="/con";
+				$("#Transicion").val("((a*n)+b)%m");
+				$("#salida").val("n/m");
+				$("#semilla").val("7");
+				$("#limite").val("20");
+				if(_bool){
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="m">Valor m</label><input class="form-control con" id="m" name="m" value="16" placeholder="Enter the m value" type="number" required> </div>');				
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="b">Valor b</label><input class="form-control con" id="b" name="b" value="3" placeholder="Enter the b value" type="number" required> </div>');
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="a">Valor a</label><input class="form-control con" id="a" name="a" value="5" placeholder="Enter the a value" type="number" required> </div>');
+					_bool=false;
+				}
+			})			
 			
 			$('#f').submit(function(){
 				event.preventDefault();
 				params=$('#f').serialize();
 				$('#formulario').hide();
 				$('h2').show();
-				
-				_tran=$('#Transicion').val().replace('+','%2B').replace(/\s/g,'');
-				_exit=$('#salida').val().replace('+','%2B').replace(/\s/g,'');
-				_seed=$('#semilla').val().replace(/\s/g,'');
-				_limit=$('#limite').val().replace(/\s/g,'');
-				
-	            $.ajax({ url:"http://"+$(location).attr('host')+"/random?"+params, success: function(dat){
+				console.log(_method)
+	            $.ajax({ url:"http://"+$(location).attr('host')+"/random"+_ruta+"?"+params,method:_method, success: function(dat){
 	            		a(dat.x,true);
 	            		a(dat.u,false);
 	            		$('#x li').each(function(index) {
