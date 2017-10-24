@@ -13,6 +13,14 @@ public class midSqr {
 	public String[] getU() {
 		return U;
 	}
+	
+	public double[] stringToDouble(String[] aux){
+		double[] d=new double[aux.length];
+		for (int i = 0; i < d.length; i++) {
+			d[i]=Double.parseDouble(aux[i]);
+		}
+		return d;
+	}
 
 	public void generarArreglos(String aux,String aux2,String s,String l) throws InstantiationException, IllegalAccessException {
 		// Create a String with Groovy code.
