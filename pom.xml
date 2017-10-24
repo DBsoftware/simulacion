@@ -25,6 +25,13 @@
 	</properties>
 
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-math3</artifactId>
+    <version>3.6.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/jsc/jsc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-integration</artifactId>
@@ -54,6 +61,13 @@
             <optional>true</optional>
         </dependency>
 
+		<dependency>
+			<groupId>jsc</groupId>
+			<artifactId>jsc</artifactId>
+			<version>1.0</version>
+				<scope>system</scope>
+	<systemPath>${basedir}/jsc.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
