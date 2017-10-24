@@ -28,7 +28,7 @@ public class RandomController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return new Listas(sC.getX(),Arrays.toString(sC.getU())
+        return new Listas(Arrays.toString(sC.getX()),Arrays.toString(sC.getU())
 				,new Probadoresaleatorios().testPromedio(sC.getU())
 				,new Probadoresaleatorios().testVarianza(sC.getU())
 				,new Probadoresaleatorios().testChiCuadrado(sC.getU())
@@ -50,7 +50,7 @@ public class RandomController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return new Listas(sC.stringToDouble(sC.getX()),Arrays.toString(sC.getU())
+        return new Listas(Arrays.toString(sC.getX()),Arrays.toString(sC.getU())
 				,new Probadoresaleatorios().testPromedio(sC.stringToDouble(sC.getU()))
 				,new Probadoresaleatorios().testVarianza(sC.stringToDouble(sC.getU()))
 				,new Probadoresaleatorios().testChiCuadrado(sC.stringToDouble(sC.getU()))
@@ -76,7 +76,7 @@ public class RandomController {
 			e.printStackTrace();
 		}
     	
-    	Listas li = new Listas(sC.getX(),Arrays.toString(sC.getU())
+    	Listas li = new Listas(Arrays.toString(sC.getX()),Arrays.toString(sC.getU())
 				,new Probadoresaleatorios().testPromedio(sC.getU())
 				,new Probadoresaleatorios().testVarianza(sC.getU())
 				,new Probadoresaleatorios().testChiCuadrado(sC.getU())
@@ -100,6 +100,7 @@ public class RandomController {
 							@RequestParam(value="w", defaultValue="1") String w
 							) {
     		double [] u= null;
+    		String  t= null;
     		switch (w) {
 			case "1":
 				u =new Fibonacci().generador(Integer.parseInt(p),
@@ -108,23 +109,28 @@ public class RandomController {
 						Integer.parseInt(m), 
 						Integer.parseInt(n0),
 						Integer.parseInt(n1));
+				t=Arrays.toString(u);
 				break;
 			case "2":
-				u =new Lecuyer().generador(Integer.parseInt(p), new Long(x), new Long(y));
+				Lecuyer a = new Lecuyer();
+				u =a.generador(Integer.parseInt(p), new Long(x), new Long(y));
+				t=Arrays.toString(a.getZ());
 				break;
 			case "3":
-				u =new Wichmanandhill().generar(Integer.parseInt(p), Integer.parseInt(x),  Integer.parseInt(y),  Integer.parseInt(z) );
+				Wichmanandhill W =new Wichmanandhill();
+				u =W.generar(Integer.parseInt(p), Integer.parseInt(x),  Integer.parseInt(y),  Integer.parseInt(z) );
+				t=Arrays.toString(W.getT());
 				break;
 			}
         	
-    		Listas l = new Listas(u,Arrays.toString(u)
+    		Listas li = new Listas(t,Arrays.toString(u)
     				,new Probadoresaleatorios().testPromedio(u)
     				,new Probadoresaleatorios().testVarianza(u)
     				,new Probadoresaleatorios().testChiCuadrado(u)
     				, new KolmogorovSmirnov(u,
     	                    jsc.goodnessfit.KolmogorovCB.exactCriticalValue(u.length, 0.05/2)
     			            ).hacerTest()); 
-    		return l;
+    		return li;
         
     }
 

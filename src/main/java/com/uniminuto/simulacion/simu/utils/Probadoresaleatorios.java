@@ -69,6 +69,7 @@ public class Probadoresaleatorios {
             t += (Math.pow((arrayFrecuencias[j] - nsk), 2) / nsk);
         }
         double x = chi.inverseCumulativeProbability(1 - alfa);
+        t=(verificarResulatdosSonMenorUno(datos))?t:x+1;
         return (t<x)?"p,"+t+","+x  :"f,"+t+","+ x;
     }
     
@@ -87,5 +88,16 @@ public class Probadoresaleatorios {
             auxs += dif;
         }
         return auxF;
+    }
+    
+    private  boolean verificarResulatdosSonMenorUno(double d[]) {
+        boolean auxi = true;
+        for (double e : d) {
+			if(e>1){
+				auxi=false;
+				break;
+			}
+		}
+        return auxi;
     }
 }

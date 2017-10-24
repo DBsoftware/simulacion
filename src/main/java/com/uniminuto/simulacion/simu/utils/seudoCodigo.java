@@ -27,10 +27,11 @@ public class seudoCodigo {
 		X = new double[auxl];
 		U = new double[auxl];
 		X[0] = auxs;
+		double y=0;
 		while (auxiliar < (auxl-1)) {
 			n++;
 			X[n] = funcionTransicion(X[n - 1],groovyScript);
-			U[n] = functionSalida(X[n],groovyScript);
+			U[n]=functionSalida(X[n],groovyScript);
 			auxiliar++;
 		}
 

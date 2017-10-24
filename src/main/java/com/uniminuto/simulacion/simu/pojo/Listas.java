@@ -1,13 +1,12 @@
 package com.uniminuto.simulacion.simu.pojo;
 
 public class Listas {
-	private double[] X;
-	private String U,pr,vr,chi,ks;
+	private String X,U,pr,vr,chi,ks;
 
 	
 
 
-	public Listas(double[] x, String u, String pr, String vr, String chi, String ks) {
+	public Listas(String x, String u, String pr, String vr, String chi, String ks) {
 		super();
 		X = x;
 		U = u;
@@ -33,11 +32,11 @@ public class Listas {
 		return ks;
 	}
 
-	public double[] getX() {
+	public String getX() {
 		return X;
 	}
 
-	public void setX(double[] x) {
+	public void setX(String x) {
 		X = x;
 	}
 

@@ -336,7 +336,8 @@
 				$('h2').show();
 				$.ajax({
 					url: "http://" + $(location).attr('host') + "/random" + _ruta + "?" + params, method: _method, success: function (dat) {
-						a(dat.x, true);
+						aux=dat.x.substr(1, dat.u.length-2);
+						a(aux.split(','), true);
 						aux=dat.u.substr(1, dat.u.length-2);
 						a(aux.split(','), false);
 						$('.modal-body').empty();
@@ -471,10 +472,10 @@
 				submitForms("#fiboFor", "w=1&");
 			};
 			submitW = function () {
-				submitForms("#WFor", "w=2&");
+				submitForms("#WFor", "w=3&");
 			};
 			submitLe = function () {
-				submitForms("#leFor", "w=3&");
+				submitForms("#leFor", "w=2&");
 			};
 			function submitForms(t, com) {
 				params = $(t).serialize();
@@ -483,7 +484,8 @@
 				_ruta = "/c";
 				$.ajax({
 					url: "http://" + $(location).attr('host') + "/random" + _ruta + "?" + com + params, method: _method, success: function (dat) {
-						//    		a(dat.u,true);
+						aux=dat.x.substr(1, dat.x.length-2);
+						a(aux.split(','), true);
 						aux=dat.u.substr(1, dat.u.length-2);
 						a(aux.split(','), false);
 						$('.modal-body').empty();
