@@ -1,8 +1,7 @@
 # simulacion
 
-Es un proyecto en spring framework. funciona sin problemas en netbeans
-Si se tiene maven instalado desde una terminal o cmd se puede hacer los siguientes comandos, dentro de la carpeta del proyecto:
-1> ./mvnw clean package
-2> java -jar target/simu-0.0.1-SNAPSHOT.jar
+Es un proyecto en spring framework. funciona sin problemas en netbeans y debe ser usado dentro de un IDE 
+Si se tiene maven instalado desde una terminal o cmd se puede hacer el siguiente comandos, dentro de la carpeta del proyecto:
+1> ./mvnw spring-boot:run
 
-y despues se abre en un navegador localhost:8080, y es todo.
+NO SE PUEDE CORRER DESDE EL JAR pues hay conflictos con la libreria jsc
