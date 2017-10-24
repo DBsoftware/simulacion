@@ -1,41 +1,53 @@
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript"
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-	rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#navbar-ex-collapse">
-					<span class="sr-only">Toggle navigation</span><span
-						class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-left navbar-nav">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false">Aleatorios
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Aleatorios
 							<i class="fa fa-caret-down"></i>
-					</a>
+						</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a style="cursor:hand" id="basic">Basic</a></li>
-							<li><a style="cursor:hand" id="mid">Midsquare</a></li>
-							<li><a style="cursor:hand" id="congruencial">Congruenciales</a></li>
-						</ul></li>
+							<li>
+								<a style="cursor:hand" id="basic">Basic</a>
+							</li>
+							<li>
+								<a style="cursor:hand" id="mid">Midsquare</a>
+							</li>
+							<li>
+								<a style="cursor:hand" id="congruencial">Congruenciales</a>
+							</li>
+							<li>
+								<a style="cursor:hand" id="Fibonnaci">Fibonnaci</a>
+							</li>
+							<li>
+								<a style="cursor:hand" id="W">Wichman</a>
+							</li>
+							<li>
+								<a style="cursor:hand" id="Le">Lecuyer</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -43,28 +55,27 @@
 	<div class="section" id="formulario">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12" id="fDiv">
 					<form role="form" id="f">
 						<div class="form-group">
 							<label class="control-label" for="semilla">Semilla</label>
-							<input class="form-control" id="semilla" name="s"
-								placeholder="Enter seed value" type="number" required>
+							<input class="form-control" id="semilla" name="s" placeholder="Enter seed value" type="number" required>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="limite">Limite</label>
-							<input class="form-control" id="limite" name="l"
-								placeholder="Enter limit value" type="number" required>
+							<input class="form-control" id="limite" name="l" placeholder="Enter limit value" type="number" required>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="Transicion">Funcion Transicion <small>(Usar n como la variable)</small></label>
-							<textArea class="form-control" id="Transicion" name="x"
-								placeholder="Enter transition function" type="text"></textArea>
+							<label class="control-label" for="Transicion">Funcion Transicion
+								<small>(Usar n como la variable)</small>
+							</label>
+							<textArea class="form-control" id="Transicion" name="x" placeholder="Enter transition function" type="text"></textArea>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="salida">Funcion salida <small>(Usar n como la variable)</small></label>
-							<textArea
-								class="form-control" id="salida" name="u"
-								placeholder="Enter exit function" type="text"></textArea>
+							<label class="control-label" for="salida">Funcion salida
+								<small>(Usar n como la variable)</small>
+							</label>
+							<textArea class="form-control" id="salida" name="u" placeholder="Enter exit function" type="text"></textArea>
 						</div>
 						<button type="submit" id="ajax" class="btn btn-default">Submit</button>
 					</form>
@@ -96,108 +107,520 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="fade modal text-center" id="moda">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h2 class="modal-title text-center text-primary">Test de Aleatorios</h2>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-default" data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<script type="text/javascript">
-		$(function(){
-			var _method="GET";
-			var _ruta="";
-			var _bool=true;
+		$(function () {
+			var _method = "GET";
+			var _ruta = "";
+			var _bool = true;
+			var _boolF = true;
+			var _boolL = true;
+			var _boolW = true;
+			var _boolCL = true;
 			$("#Transicion").val("(n+2)/Math.pow(n, 2)");
 			$("#salida").val("n / 33");
 			$("#semilla").val("2");
-			$("#limite").val("20");			
-			var midT = 'int num =n.toInteger();\n'+
-						'int aux = 10000;\n'+
-						'int count = 2;'+
-						'while ((num.toString()).length() > count) {\n'+
-						'aux *= 10;\n'+
-						'count++;\n'+
-						'}\n'+
-						'String s=(Math.pow(num, 2) / aux).toString();\n'+
-						's=s.substring(s.indexOf(".")+1);\n'+
-						'while (s.length() < 4) {\n'+
-						's += "0";\n'+
-						'}\n'+
-						'if(s.length() > 4){\n'+
-						's=s.substring(0, 4);\n'+
-						'}\n'+
-						's ';
+			$("#limite").val("20");
+			var midT = 'int num =n.toInteger();\n' +
+				'int aux = 10000;\n' +
+				'int count = 2;' +
+				'while ((num.toString()).length() > count) {\n' +
+				'aux *= 10;\n' +
+				'count++;\n' +
+				'}\n' +
+				'String s=(Math.pow(num, 2) / aux).toString();\n' +
+				's=s.substring(s.indexOf(".")+1);\n' +
+				'while (s.length() < 4) {\n' +
+				's += "0";\n' +
+				'}\n' +
+				'if(s.length() > 4){\n' +
+				's=s.substring(0, 4);\n' +
+				'}\n' +
+				's ';
 			var midE = '"0.$n";';
 			$('h2').hide();
-			function a(aux,b){
-				(b)?aux.forEach(generarListaX):aux.forEach(generarListaU);
+			function a(aux, b) {
+				(b) ? aux.forEach(generarListaX) : correccion(aux) ;
 			}
 			function generarListaX(item) {
-			    $('#x').append('<li class="list-group-item" style="display:none" >'+item+'</li>');
+				$('#x').append('<li class="list-group-item" style="display:none" >' + item + '</li>');
 			}
 			function generarListaU(item) {
-			    $('#u').append('<li class="list-group-item" style="display:none">'+item+'</li>');
+				$('#u').append('<li class="list-group-item" style="display:none">' + item + '</li>');
 			}
-			
-			$('#mid').click(()=>{
-				_method="POST";
-				_ruta="";
+			function correccion(aux){
+				aux[0]="-";
+				aux.forEach(generarListaU)
+			}
+			function back() {
+				$("#f").show();
+				$('#leFor').remove();
+				$('#WFor').remove();
+				$('#fiboFor').remove();
+			}
+
+			$('#mid').click(() => {
+				back();
+				_method = "POST";
+				_ruta = "";
 				$("#Transicion").val(midT);
 				$("#salida").val(midE);
 				$("#semilla").val("3708");
 				$("#limite").val("9");
 				$("#f").find(".con").remove();
-				_bool=true;
-				
+				_bool = true;
+				_boolF = true;
+				_boolL = true;
+				_boolW = true;
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
 			})
-			
-			$('#basic').click(()=>{
-				_method="GET";
-				_ruta="";
+
+			$('#basic').click(() => {
+				back();
+				_method = "GET";
+				_ruta = "";
 				$("#Transicion").val("(n+2)/Math.pow(n, 2)");
 				$("#salida").val("n / 33");
 				$("#semilla").val("2");
-				$("#limite").val("20");	
+				$("#limite").val("20");
 				$("#f").find(".con").remove();
-				_bool=true;
-			})	
-			$('#congruencial').click(()=>{				
-				_method="GET";
-				_ruta="/con";
+				_bool = true;
+				_boolF = true;
+				_boolL = true;
+				_boolW = true;
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
+			})
+			$('#congruencial').click(() => {
+				back();
+				_method = "GET";
+				_ruta = "/con";
+				_boolF = true;
+				_boolL = true;
+				_boolW = true;
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
+
+				if (_bool) {
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="m">Valor m</label><input class="form-control con" id="m" name="m" value="16" placeholder="Enter the m value" type="number" required> </div>');
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="b">Valor b</label><input class="form-control con" id="b" name="b" value="3" placeholder="Enter the b value" type="number" required> </div>');
+					$("#f").prepend('<div class="form-group"><label class="control-label con" for="a">Valor a</label><input class="form-control con" id="a" name="a" value="5" placeholder="Enter the a value" type="number" required> </div>');
+					_bool = false;
+				}
 				$("#Transicion").val("((a*n)+b)%m");
 				$("#salida").val("n/m");
 				$("#semilla").val("7");
 				$("#limite").val("20");
-				if(_bool){
-					$("#f").prepend('<div class="form-group"><label class="control-label con" for="m">Valor m</label><input class="form-control con" id="m" name="m" value="16" placeholder="Enter the m value" type="number" required> </div>');				
-					$("#f").prepend('<div class="form-group"><label class="control-label con" for="b">Valor b</label><input class="form-control con" id="b" name="b" value="3" placeholder="Enter the b value" type="number" required> </div>');
-					$("#f").prepend('<div class="form-group"><label class="control-label con" for="a">Valor a</label><input class="form-control con" id="a" name="a" value="5" placeholder="Enter the a value" type="number" required> </div>');
-					_bool=false;
+			});
+
+			$('#Fibonnaci').click(() => {
+				$("#f").hide();
+				var fiboFor = '<form class="form-horizontal" role="form" id="fiboFor">' +
+					' <div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">n0</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="text" name="n0" class="form-control" value="4">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">n1</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="number" name="n1" class="form-control" value="11">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">m</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="number" name="m" class="form-control" value="13">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">r</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="number" name="r" class="form-control" value="2">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">s</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="number" name="s" class="form-control" value="1">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">Parada</label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <input type="number" name="p" class="form-control" value="8">' +
+					'    </div>' +
+					'</div>' +
+					'<div class="form-group">' +
+					'    <div class="col-sm-2">' +
+					'        <label class="control-label">Operacion' +
+					'            <br>' +
+					'        </label>' +
+					'    </div>' +
+					'    <div class="col-sm-10">' +
+					'        <select class="form-control" name="op" >' +
+					'            <option>+</option>' +
+					'            <option>-</option>' +
+					'            <option>*</option>' +
+					'        </select>' +
+					'   </div>' +
+					'</div>' +
+					' <div class="form-group">' +
+					'      <div class="col-sm-offset-2 col-sm-10">' +
+					'           <button type="button" onClick="submitFibo()" class="btn btn-default">Enviar</button>' +
+					'        </div>' +
+					'    </div>' +
+					'</form>';
+
+				_boolL = true;
+				_boolW = true;
+				if (_boolF) {
+					$('#fDiv').append(fiboFor)
+					_boolF = false;
 				}
-			})			
-			
-			$('#f').submit(function(){
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
+
+				$('#leFor').remove();
+				$('#WFor').remove();
+
+			});
+
+			$('#f').submit(function () {
 				event.preventDefault();
-				params=$('#f').serialize();
+				params = $('#f').serialize();
 				$('#formulario').hide();
 				$('h2').show();
-				console.log(_method)
-	            $.ajax({ url:"http://"+$(location).attr('host')+"/random"+_ruta+"?"+params,method:_method, success: function(dat){
-	            		a(dat.x,true);
-	            		a(dat.u,false);
-	            		$('#x li').each(function(index) {
-	            			$(this).delay(1000*index).fadeIn(300);
-	            		});
-	            		var set = $('#u li');
-	            		set.each(function(index) {
-	            			$(this).delay(1000*index).fadeIn(300);
-	            		});
-	            		$('.l').prepend('<a id="back" class="btn btn-default">Volver</a>');
-	            		$('#back').click(function(){
-	            			$('#u').empty();
-	            			$('#x').empty();
-	            			$('h2').hide();
-	            			$('#formulario').show();
-	            			$(this).remove();
-	            		})
-	                }
-	             });
-			});  
+				$.ajax({
+					url: "http://" + $(location).attr('host') + "/random" + _ruta + "?" + params, method: _method, success: function (dat) {
+						a(dat.x, true);
+						aux=dat.u.substr(1, dat.u.length-2);
+						a(aux.split(','), false);
+						$('.modal-body').empty();
+						$('.modal-body').append(tablasPruebas(dat.pr, dat.vr, dat.rs, dat.chi));
+						$('#moda').modal('show');
+						$('#x li').each(function (index) {
+							$(this).delay(1000 * index).fadeIn(300);
+						});
+						var set = $('#u li');
+						set.each(function (index) {
+							$(this).delay(1000 * index).fadeIn(300);
+						});
+						$('.l').prepend('<a id="back" onClick="getback(this)" class="btn btn-default">Volver</a>');
+
+					}
+				});
+			});
+
+			$('#W').click(() => {
+				$("#f").hide();
+				var WFor =
+					'      <form class="form-horizontal" role="form" id="WFor">' +
+					'           <div class="form-group">' +
+					'               <div class="col-sm-2">' +
+					'                   <label class="control-label">Valor X</label>' +
+					'               </div>' +
+					'               <div class="col-sm-10">' +
+					'                   <input type="number" name="x" class="form-control" value="12345">' +
+					'               </div>' +
+					'           </div>' +
+					'           <div class="form-group">' +
+					'               <div class="col-sm-2">' +
+					'                   <label class="control-label">Valor Y</label>' +
+					'               </div>' +
+					'               <div class="col-sm-10">' +
+					'                   <input type="number" name="y" class="form-control" value="34567">' +
+					'               </div>' +
+					'           </div>' +
+					'           <div class="form-group">' +
+					'               <div class="col-sm-2">' +
+					'                   <label class="control-label">Valor Z</label>' +
+					'               </div>' +
+					'               <div class="col-sm-10">' +
+					'                   <input type="number" name="z" class="form-control" value="56789">' +
+					'               </div>' +
+					'           </div>' +
+					'           <div class="form-group">' +
+					'               <div class="col-sm-2">' +
+					'                   <label class="control-label">Parada' +
+					'                       <br>' +
+					'                   </label>' +
+					'               </div>' +
+					'               <div class="col-sm-10">' +
+					'                   <input type="number" name="p" class="form-control" value="8">' +
+					'               </div>' +
+					'           </div>' +
+					'           <div class="form-group">' +
+					'               <div class="col-sm-offset-2 col-sm-10">' +
+					'                   <button type="button" onClick="submitW()" class="btn btn-default">Enviar</button>' +
+					'               </div>' +
+					'           </div>' +
+					'       </form>'
+					;
+				_boolF = true;
+				_boolL = true;
+				if (_boolW) {
+					$('#fDiv').append(WFor);
+					_boolW = false;
+				}
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
+
+				$('#fiboFor').remove();
+				$('#leFor').remove();
+
+			});
+			$('#Le').click(() => {
+				$("#f").hide();
+				var leFor = '<form class="form-horizontal" role="form" id="leFor">' +
+					'            <div class="form-group">' +
+					'                <div class="col-sm-2">' +
+					'                    <label class="control-label">Valor X</label>' +
+					'                </div>' +
+					'                <div class="col-sm-10">' +
+					'                    <input type="number" name="x" class="form-control" value="12345">' +
+					'                </div>' +
+					'            </div>' +
+					'            <div class="form-group">' +
+					'                <div class="col-sm-2">' +
+					'                    <label class="control-label">Valor Y</label>' +
+					'                </div>' +
+					'                <div class="col-sm-10">' +
+					'                    <input type="number" name="y" class="form-control" value="67">' +
+					'                </div>' +
+					'            </div>' +
+					'            <div class="form-group">' +
+					'                <div class="col-sm-2">' +
+					'                    <label class="control-label">Parada' +
+					'                        <br>' +
+					'                    </label>' +
+					'                </div>' +
+					'                <div class="col-sm-10">' +
+					'                    <input type="number" name="p" class="form-control" value="8">' +
+					'                </div>' +
+					'            </div>' +
+					'            <div class="form-group">' +
+					'                <div class="col-sm-offset-2 col-sm-10">' +
+					'                    <button type="button" onClick="submitLe()" class="btn btn-default">Enviar</button>' +
+					'                </div>' +
+					'            </div>' +
+					'       </form>';
+				$('#fiboFor').remove();
+				$('#WFor').remove();
+				_boolF = true;
+				_boolW = true;
+				if (_boolL) {
+					$('#fDiv').append(leFor);
+					_boolL = false;
+				}
+				$('#u').empty();
+				$('#x').empty();
+				$('h2').hide();
+				$('#formulario').show();
+				$('#back').remove();
+
+			});
+
+			submitFibo = function () {
+				submitForms("#fiboFor", "w=1&");
+			};
+			submitW = function () {
+				submitForms("#WFor", "w=2&");
+			};
+			submitLe = function () {
+				submitForms("#leFor", "w=3&");
+			};
+			function submitForms(t, com) {
+				params = $(t).serialize();
+				$('#formulario').hide();
+				$('h2').show();
+				_ruta = "/c";
+				$.ajax({
+					url: "http://" + $(location).attr('host') + "/random" + _ruta + "?" + com + params, method: _method, success: function (dat) {
+						//    		a(dat.u,true);
+						aux=dat.u.substr(1, dat.u.length-2);
+						a(aux.split(','), false);
+						$('.modal-body').empty();
+						$('.modal-body').append(tablasPruebas(dat.pr, dat.vr, dat.rs, dat.chi));
+						$('#moda').modal('show');
+						$('#x li').each(function (index) {
+							$(this).delay(1000 * index).fadeIn(300);
+						});
+						var set = $('#u li');
+						set.each(function (index) {
+							$(this).delay(1000 * index).fadeIn(300);
+						});
+						$('.l').prepend('<a id="back" onClick="getback(this)" class="btn btn-default">Volver</a>');
+
+					}
+				});
+			}
+
+			function tablasPruebas(p, v, k, c) {
+				t = '<div class="section"> ' +
+					'    <div class="container"> ' +
+					'        <div class="row"> ' +
+					'            <div class="col-md-6"> ' +
+					'                <table class="table"> ' +
+					'                    <thead> ' +
+					'                        <tr> ' +
+					'                            <th>Test Promedios</th> ' +
+					'                            <th> ' + ((p.split(',')[0] == "p") ? '<i class="fa fa-3x fa-check fa-fw text-success"></i> <small class="text-success">Pass</small>' : '<i class="fa fa-3x fa-exclamation-circle fa-fw text-danger"></i> <small class="text-danger">Fail</small> ') +
+					'                            </th> ' +
+					'                        </tr> ' +
+					'                    </thead> ' +
+					'                    <tbody> ' +
+					'                        <tr> ' +
+					'                            <td>Limite Inferior</td> ' +
+					'                            <td>' + p.split(',')[1] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Media</td> ' +
+					'                            <td>' + p.split(',')[2] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Limite Superior</td> ' +
+					'                            <td>' + p.split(',')[3] + '</td> ' +
+					'                        </tr> ' +
+					'                    </tbody> ' +
+					'                </table> ' +
+					'            </div> ' +
+					'        </div> ' +
+
+					'        <div class="row"> ' +
+					'            <div class="col-md-6"> ' +
+					'                <table class="table"> ' +
+					'                    <thead> ' +
+					'                        <tr> ' +
+					'                            <th>Test &nbsp;Varianza</th> ' +
+					'		                     <th> ' + ((v.split(',')[0] == "p") ? '<i class="fa fa-3x fa-check fa-fw text-success"></i> <small class="text-success">Pass</small>' : '<i class="fa fa-3x fa-exclamation-circle fa-fw text-danger"></i> <small class="text-danger">Fail</small> ') +
+					'                            </th> ' +
+					'                        </tr> ' +
+					'                    </thead> ' +
+					'                    <tbody> ' +
+					'                        <tr> ' +
+					'                            <td>Limite Inferior</td> ' +
+					'                            <td>' + v.split(',')[1] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Varianza</td> ' +
+					'                            <td>' + v.split(',')[2] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Limite Superior</td> ' +
+					'                            <td>' + v.split(',')[3] + '</td> ' +
+					'                        </tr> ' +
+					'                    </tbody> ' +
+					'                </table> ' +
+					'            </div> ' +
+					'        </div> ' +
+
+					'        <div class="row"> ' +
+					'            <div class="col-md-6"> ' +
+					'                <table class="table"> ' +
+					'                    <thead> ' +
+					'                        <tr> ' +
+					'                            <th>Test &nbsp;Kolgomorov Smirnov</th> ' +
+					'		                     <th> ' + ((k.split(',')[0] == "p") ? '<i class="fa fa-3x fa-check fa-fw text-success"></i> <small class="text-success">Pass</small>' : '<i class="fa fa-3x fa-exclamation-circle fa-fw text-danger"></i> <small class="text-danger">Fail</small> ') +
+					'                            </th> ' +
+					'                        </tr> ' +
+					'                    </thead> ' +
+					'                    <tbody> ' +
+					'                        <tr> ' +
+					'                            <td>D MAX</td> ' +
+					'                            <td>' + k.split(',')[1] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Alpha</td> ' +
+					'                            <td>' + k.split(',')[2] + '</td> ' +
+					'                        </tr> ' +
+					'                    </tbody> ' +
+					'                </table> ' +
+					'            </div> ' +
+					'        </div> ' +
+
+					'        <div class="row"> ' +
+					'            <div class="col-md-6"> ' +
+					'                <table class="table"> ' +
+					'                    <thead> ' +
+					'                        <tr> ' +
+					'                            <th contenteditable="true">Test &nbsp;Chi Cuadrado</th> ' +
+					'		                     <th> ' + ((c.split(',')[0] == "p") ? '<i class="fa fa-3x fa-check fa-fw text-success"></i> <small class="text-success">Pass</small>' : '<i class="fa fa-3x fa-exclamation-circle fa-fw text-danger"></i> <small class="text-danger">Fail</small> ') +
+					'                            </th> ' +
+					'                        </tr> ' +
+					'                    </thead> ' +
+					'                    <tbody> ' +
+					'                        <tr> ' +
+					'                            <td>T</td> ' +
+					'                            <td>' + c.split(',')[1] + '</td> ' +
+					'                        </tr> ' +
+					'                        <tr> ' +
+					'                            <td>Alpha</td> ' +
+					'                            <td>' + c.split(',')[2] + '</td> ' +
+					'                        </tr> ' +
+					'                    </tbody> ' +
+					'                </table> ' +
+					'            </div> ' +
+					'        </div> ' +
+					'    </div> ' +
+					'</div> ';
+				return t;
+			}
+			getback=function(t){
+							$('#u').empty();
+							$('#x').empty();
+							$('h2').hide();
+							$('#formulario').show();
+							$(t).remove();
+			}
 		});
 	</script>
 </body>
+
 </html>
